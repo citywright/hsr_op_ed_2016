@@ -1,0 +1,169 @@
+---
+title: "A Land Use Solution in Search of a Transport Problem"
+author: "Jonathan Wright @citywright"
+date: "30 July 2016"
+output: html_document
+---
+
+```{r Code, echo=FALSE, warning=FALSE, message=FALSE}
+# ====================================================================================
+# Australian Airline Passenger Time Series
+# Analysis by Jon Wright @citywright
+# Data from Bureau of Infrastructure, Transport and Regional Economics (BITRE)
+# https://bitre.gov.au/publications/ongoing/domestic_airline_activity-time_series.aspx
+# Accessed on 27 July 2016
+# ====================================================================================
+
+# This script relies on the following packages already being installed:
+
+library(ggplot2)
+library(lubridate)
+library(reshape2)
+library(dplyr)
+
+# ------------------------------------------------------------------------------------
+# NOTE: Due to OSx Yosemite Java error in the package "xlsx", I have downloaded the 
+# data manually and converted the file manually to .csv format.  Note that only the 
+# tab called "Top Routes" in each spreadsheet is used in this analysis. This script 
+# assumes each .csv file is already in the local working directory. (When I have a
+# little more time on my hands, I'll fix up the Java error and rewrite the download
+# script so that this pulls directly from the web.)
+# ------------------------------------------------------------------------------------
+
+
+
+# -- Import -- #
+
+# Download the following files and save tab "Top Routes" as .csv file in working directory.
+# "https://bitre.gov.au/publications/ongoing/files/domestic_airline_activity_Toproutes_Jan84-Jun94.xls"
+# "https://bitre.gov.au/publications/ongoing/files/domestic_airline_activity_TopRoutesJuly1994June2004.xls"
+# "https://bitre.gov.au/publications/ongoing/files/Domestic_aviation_activity_TopRoutesJuly2004May2016.xls"
+
+air_1984_1994 <- read.csv(file="domestic_airline_activity_Toproutes_Jan84-Jun94.csv",
+                          skip =  6, stringsAsFactors = FALSE)
+air_1994_2004 <- read.csv(file="domestic_airline_activity_TopRoutesJuly1994June2004.csv",
+                          skip =  7, stringsAsFactors = FALSE)
+air_2004_2016 <- read.csv(file="Domestic_aviation_activity_TopRoutesJuly2004May2016.csv",
+                          skip = 11, stringsAsFactors = FALSE)
+
+
+
+# -- Clean Up -- #
+
+# Clear out extra header rows and append the three datasets, taking only the monthly data
+air01 <- air_1984_1994[-c(1:3),]
+air02 <- air_1994_2004[-1,c(1:10)]
+air03 <- air_2004_2016[-1,c(1:10)]
+airfull <- rbind(air01,air02,air03)
+
+# Clean up colunm names
+colnames(airfull)[1:2]   <- c("City_1","City_2")
+colnames(airfull)[5:8]   <- c("RevPax","AircraftTrips","LoadFactorPCT","DistanceKM")
+
+# Convert numbers stored as strings to integers
+for (j in seq(5,10)) {
+    airfull[,j] <- as.numeric(gsub(",","",airfull[,j]))
+}
+
+# Convert Origin, Destination fields to factors
+for (j in c(1,2)) {
+    airfull[,j] <- as.factor(airfull[,j])
+}
+
+
+# -- Process -- #
+
+# Convert Year and Month into single date field (for x-axis of plots)
+airfull$LongDate <- ymd(with(airfull,paste(Year,Month,"1",sep="/")))
+
+# Create CityPair field as hyphenated pair of City_1 and City_2
+airfull$CityPair <- with(airfull, paste(City_1,City_2,sep="-"))
+
+# Create RevPax field in thousands, for plotting purposes
+airfull$RevPaxK <- airfull$RevPax/1000
+
+# Create LoadFactor field in actual percentage
+airfull$LoadFactor <- airfull$LoadFactorPCT/100
+
+```
+
+High-speed rail has captured Australia's imagination for decades, generating studies and attracting support 
+across the political spectrum.  Sydney to Melbourne is already the fifth-most traveled commercial air route in 
+the world.  With all the hassles of flying, the thought of being whisked comfortably from Spencer Street to 
+Circular Quay in under two hours is indeed alluring.  But sky-high construction costs and long profitability 
+timelines have kept the dream out of reach.  According to the latest government report, high-speed rail from 
+Brisbane to Melbourne could cost $114 billion and take 40 years to cover costs.
+
+Enter Consolidated Land and Rail Australia (CLARA), a private group with a proposal to deliver the first stage 
+high-speed rail from Sydney to Melbourne without public funding.  All this while promising to relieve 
+development pressures and unclog congestion in existing cities by “rebalancing settlement” to eight new regional
+cities along the rail line.  The proposal relies on 'value capture,' an established and highly-touted model for
+funding public infrastructure by capitalizing on increased land values through tax or contributions.  
+
+But the CLARA proposal bets big on three tenuous assumptions that should give the government pause: the ease 
+of creating new cities, the benefits of urban decentralization, and the long-term viability of high-speed rail.  
+
+```{r Plot, echo=FALSE, warning=FALSE}
+
+pax <- ggplot(airfull, aes(x=LongDate, y=RevPaxK, color=CityPair)) + geom_line(alpha=0.5) +
+        labs(title = "Australian Monthly Domestic Airline Passengers by City Pair, 1984-2016",
+             caption = "Created in Rstudio using data from https://bitre.gov.au/publications/ongoing/domestic_airline_activity-time_series.aspx") + 
+        xlab("Date") + ylab("Passengers in Thousands") + 
+        theme(plot.title = element_text(size = 12, face = "bold"),
+              axis.title = element_text(size = 10),
+              plot.caption = element_text(size = 8),
+              legend.position = "none") +
+        geom_text(aes(x=airfull$LongDate[20380], y=750, label="SYD-MEL"), color="black")
+
+plot(pax)
+```
+
+Value capture works best when supporting sensible infrastructure near existing land use assets, like Sydney's 
+Central station.  If it also requires compulsory acquisition, the government must take extra care not to 
+conflate private profits with public interest.  CLARA would create and capture value from new cities along the
+line, the cost and complexity of which cannot be underestimated.  New cities need more than housing and a 
+station.  They need roads and pipes; infrastructure for energy, waste, and communications; parks, reserves, 
+schools, hospitals, and businesses.  And cities needs people to run all of these; not everyone will commune by 
+train.  
+
+So cities must also be communities – vibrant and attractive places in their own right.  Places are successful 
+when they impart a sense of the timeless.  The irony of a futuristic, hyper-connected city in a paddock is that 
+it would be wholly disconnected from any sense of history.  The CLARA proposal risks putting too much faith in 
+our ability to create sustainable places from scratch.  Great thinkers from Jane Jacobs to Jan Gehl have taught 
+that the soul of great places emerge from the unplanned and unexpected.   
+
+If these cities fail to take off, how will later stages of the rail be funded?  What would be the public cost 
+of propping these cities up, or the consequences of winding them down?  
+
+CLARA touts high-speed rail as “the best technology available for the foreseeable future.”  But the transport 
+sector is undergoing a dramatic upheaval from a convergence of disruptive technologies and the rise of the 
+sharing economy.  Advances in autonomous vehicles could dramatically increase the safety and capacity of 
+existing motorways, rebalancing the location equation for housing.  Advances in virtual and augmented reality 
+could reduce the need for travel altogether.  New technologies that sound outlandish now could be closer than 
+we think.   
+
+If the rail line fails to achieve the necessary ridership to cover costs, will the public be willing and able 
+to subsidize its operations to keep it running?  
+
+Even if we could create livable cities, it's worth asking whether we should.  Seventy years of outward sprawl 
+has left us struggling to pay maintenance and mortgages.  Decades of designing cities for cars and traffic, to 
+paraphrase the urbanist Fred Kent, have embedded social challenges into the fabric of our cities: from traffic 
+congestion to social disconnection.  The CLARA proposal mistakenly assumes that the answer to our growing cities 
+is to continue spreading further out, rather than seeking infrastructure efficiency through consolidation.
+
+We cannot afford to disregard the risks of success.  If the CLARA proposal were built, what would the 
+opportunity costs be for our existing cities?  Which infrastructure projects and public policies would we 
+forgo by shifting money, energy, and expertise towards a high-speed rail line and eight new cities?  
+
+It's easy to find risks in big ideas, and the CLARA proposal deserves credit for its ambition.  This shouldn't
+stop governments from thinking big, for the wicked problems facing our cities – climate change, housing 
+affordability, aging population, and a changing economy – will require strong leadership and bold solutions.  
+But nor should the enormity of our collective challenges inspire haste.  
+
+The government should continue to investigate transformative projects like high-speed rail, and value-capture 
+should play a role.  But it should be used to support necessary infrastructure rather than land 
+speculation.  
+
+Instead, we should look to invest in solutions that bring people together rather than spread them apart, and 
+plan for innovation rather than betting big on one technology.  Instead of reinventing our cities, let's keep 
+building on what already makes them great.  
