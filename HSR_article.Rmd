@@ -105,15 +105,26 @@ of creating new cities, the benefits of urban decentralization, and the long-ter
 
 ```{r Plot, echo=FALSE, warning=FALSE}
 
-pax <- ggplot(airfull, aes(x=LongDate, y=RevPaxK, color=CityPair)) + geom_line(alpha=0.5) +
-        labs(title = "Australian Monthly Domestic Airline Passengers by City Pair, 1984-2016",
-             caption = "Created in Rstudio using data from https://bitre.gov.au/publications/ongoing/domestic_airline_activity-time_series.aspx") + 
-        xlab("Date") + ylab("Passengers in Thousands") + 
-        theme(plot.title = element_text(size = 12, face = "bold"),
-              axis.title = element_text(size = 10),
+# Create Alpha flag to highlight city pairs along the proposed HSR routes
+airfull$Alpha <- 0.4
+airfull$Alpha[airfull$CityPair == "MEL-SYD"] <- 0.9
+airfull$Alpha[airfull$CityPair == "CBR-MEL"] <- 0.9
+airfull$Alpha[airfull$CityPair == "CBR-SYD"] <- 0.9
+# Now set a dummy value to force 3rd factor value of Alpha, to bring up the opacity of the non-HSR
+# city pairs. It's a hack, but it get the plot looking much better in the short time I have left!
+airfull$Alpha[airfull$CityPair == "HTI-MEL"] <- 0.3 
+
+pax <- ggplot(airfull, aes(x=LongDate, y=RevPaxK, color=CityPair)) + geom_line(aes(alpha=Alpha)) +
+        labs(title = "Australian Montly Airline Passenger Totals by City Pair, 1984-2016",
+             caption = "Created in Rstudio using data from: https://bitre.gov.au/publications/ongoing/domestic_airline_activity-time_series.aspx") + 
+        xlab("") + ylab("Bidirectional Passengers in Thousands") + 
+        theme(plot.title = element_text(size = 14, face = "bold"),
+              axis.title = element_text(size = 11),
               plot.caption = element_text(size = 8),
               legend.position = "none") +
-        geom_text(aes(x=airfull$LongDate[20380], y=750, label="SYD-MEL"), color="black")
+        geom_text(aes(x=airfull$LongDate[20380], y=750, label="SYD/MEL"), color="black") +
+        geom_text(aes(x=airfull$LongDate[20380], y=115, label="MEL/CBR"), color="black") +
+        geom_text(aes(x=airfull$LongDate[20380], y= 50, label="CBR/SYD"), color="black")
 
 plot(pax)
 ```
