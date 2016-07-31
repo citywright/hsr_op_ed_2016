@@ -88,16 +88,16 @@ airfull$LoadFactor <- airfull$LoadFactorPCT/100
 ```
 
 High-speed rail has captured Australia's imagination for decades, generating studies and attracting support 
-across the political spectrum.  Sydney to Melbourne is already the fifth-most traveled commercial air route in 
+[across](http://greens.org.au/high-speed-rail) the [political](http://www.100positivepolicies.org.au/high_speed_rail) [spectrum](http://www.theaustralian.com.au/national-affairs/malcolm-turnbulls-ticket-to-deliver-fast-train/news-story/feae238d4c3a6253982e28ff4e156c94).  Sydney to Melbourne is already the [fifth-most traveled](http://www.economist.com/blogs/graphicdetail/2012/05/daily-chart-8) commercial air route in 
 the world.  With all the hassles of flying, the thought of being whisked comfortably from Spencer Street to 
 Circular Quay in under two hours is indeed alluring.  But sky-high construction costs and long profitability 
-timelines have kept the dream out of reach.  According to the latest government report, high-speed rail from 
+timelines have kept the dream out of reach.  According to the [latest government report](https://infrastructure.gov.au/rail/trains/high_speed/), high-speed rail from 
 Brisbane to Melbourne could cost $114 billion and take 40 years to cover costs.
 
-Enter Consolidated Land and Rail Australia (CLARA), a private group with a proposal to deliver the first stage 
+Enter Consolidated Land and Rail Australia (CLARA), a private group with [a proposal](http://www.clara.com.au/the-clara-plan.html) to deliver the first stage 
 high-speed rail from Sydney to Melbourne without public funding.  All this while promising to relieve 
 development pressures and unclog congestion in existing cities by “rebalancing settlement” to eight new regional
-cities along the rail line.  The proposal relies on 'value capture,' an established and highly-touted model for
+cities along the rail line.  The proposal relies on 'value capture,' an [established](http://infrastructureaustralia.gov.au/policy-publications/publications/files/IA_J16-2330_Fact_Sheet_Funding_v1.2.pdf) and [highly-touted](http://www.afr.com/opinion/value-capture-is-infrastructure-magic-bullet-20151021-gkeqj9) model for
 funding public infrastructure by capitalizing on increased land values through tax or contributions.  
 
 But the CLARA proposal bets big on three tenuous assumptions that should give the government pause: the ease 
@@ -118,8 +118,8 @@ pax <- ggplot(airfull, aes(x=LongDate, y=RevPaxK, color=CityPair)) + geom_line(a
 plot(pax)
 ```
 
-Value capture works best when supporting sensible infrastructure near existing land use assets, like Sydney's 
-Central station.  If it also requires compulsory acquisition, the government must take extra care not to 
+Value capture works best when supporting [sensible infrastructure](http://www.theage.com.au/victoria/highrises-to-soar-over-suburban-stations-to-help-fund-level-crossing-removals-20160725-gqd3gi.html) near existing land use assets, [like Sydney's 
+Central station](https://infrastructure.gov.au/rail/trains/high_speed/files/HSR_Phase_2_Chapter_7.pdf.  If it also requires compulsory acquisition, the government must take extra care not to 
 conflate private profits with public interest.  CLARA would create and capture value from new cities along the
 line, the cost and complexity of which cannot be underestimated.  New cities need more than housing and a 
 station.  They need roads and pipes; infrastructure for energy, waste, and communications; parks, reserves, 
@@ -129,29 +129,28 @@ train.
 So cities must also be communities – vibrant and attractive places in their own right.  Places are successful 
 when they impart a sense of the timeless.  The irony of a futuristic, hyper-connected city in a paddock is that 
 it would be wholly disconnected from any sense of history.  The CLARA proposal risks putting too much faith in 
-our ability to create sustainable places from scratch.  Great thinkers from Jane Jacobs to Jan Gehl have taught 
+our ability to create sustainable places from scratch.  Great thinkers from [Jane Jacobs](https://www.theguardian.com/cities/2016/may/04/jane-jacobs-100th-birthday-saskia-sassen) to [Jan Gehl](http://www.fastcodesign.com/3061586/slicker-city/5-rules-for-designing-great-cities-from-denmarks-star-urbanist) have taught 
 that the soul of great places emerge from the unplanned and unexpected.   
 
 If these cities fail to take off, how will later stages of the rail be funded?  What would be the public cost 
 of propping these cities up, or the consequences of winding them down?  
 
 CLARA touts high-speed rail as “the best technology available for the foreseeable future.”  But the transport 
-sector is undergoing a dramatic upheaval from a convergence of disruptive technologies and the rise of the 
-sharing economy.  Advances in autonomous vehicles could dramatically increase the safety and capacity of 
-existing motorways, rebalancing the location equation for housing.  Advances in virtual and augmented reality 
-could reduce the need for travel altogether.  New technologies that sound outlandish now could be closer than 
-we think.   
+sector is undergoing a dramatic upheaval from a [convergence of disruptive technologies](http://www.vox.com/a/new-economy-future/transportation) and the rise of the 
+sharing economy.  Advances in [autonomous vehicles](https://www.wired.com/2016/01/the-metastructure-transportation/) could dramatically increase the safety and capacity of 
+existing motorways, rebalancing the location equation for housing.  Advances in virtual and [augmented reality](http://www.wired.com/2016/04/magic-leap-vr/) 
+could [reduce the need for travel](http://www.wired.com/2015/09/my-life-as-a-robot-double-robotics-telecommuting-longread/) altogether.  New technologies that sound [outlandish](http://www.theverge.com/2016/7/5/12099612/hyperloop-one-helsinki-stockholm-30-minutes-study) now could be [closer than we think](http://waitbutwhy.com/2015/01/artificial-intelligence-revolution-1.html).   
 
 If the rail line fails to achieve the necessary ridership to cover costs, will the public be willing and able 
 to subsidize its operations to keep it running?  
 
-Even if we could create livable cities, it's worth asking whether we should.  Seventy years of outward sprawl 
-has left us struggling to pay maintenance and mortgages.  Decades of designing cities for cars and traffic, to 
-paraphrase the urbanist Fred Kent, have embedded social challenges into the fabric of our cities: from traffic 
+Even if we could create livable cities, it's worth asking whether we should.  Seventy years of [outward sprawl](http://www.citylab.com/housing/2015/02/why-are-developers-still-building-sprawl/385922/) 
+has left us [struggling](http://www.strongtowns.org/journal/2011/6/13/the-growth-ponzi-scheme-part-1.html) to pay maintenance and mortgages.  Decades of [designing cities for cars and traffic](http://www.theatlantic.com/business/archive/2016/04/absurd-primacy-of-the-car-in-american-life/476346/), to 
+paraphrase the urbanist [Fred Kent](http://www.pps.org/blog/transportationasplace/), have embedded social challenges into the fabric of our cities: from traffic 
 congestion to social disconnection.  The CLARA proposal mistakenly assumes that the answer to our growing cities 
 is to continue spreading further out, rather than seeking infrastructure efficiency through consolidation.
 
-We cannot afford to disregard the risks of success.  If the CLARA proposal were built, what would the 
+We cannot afford to [disregard the risks of success](http://mobile.nytimes.com/2016/06/29/world/europe/boris-johnson-brexit-leaders-eu.html).  If the CLARA proposal were built, what would the 
 opportunity costs be for our existing cities?  Which infrastructure projects and public policies would we 
 forgo by shifting money, energy, and expertise towards a high-speed rail line and eight new cities?  
 
@@ -165,5 +164,5 @@ should play a role.  But it should be used to support necessary infrastructure r
 speculation.  
 
 Instead, we should look to invest in solutions that bring people together rather than spread them apart, and 
-plan for innovation rather than betting big on one technology.  Instead of reinventing our cities, let's keep 
-building on what already makes them great.  
+plan for innovation rather than betting big on one technology.  Instead of reinventing our cities, let's 
+[keep building](http://www.theatlantic.com/magazine/archive/2016/03/how-america-is-putting-itself-back-together/426882/) on what already makes them great.  
